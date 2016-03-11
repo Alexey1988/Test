@@ -1,0 +1,106 @@
+function rand (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+ }
+
+ function createArray(size) {
+  size = size || 3;
+  var arr = [],
+   MIN_RND = 1;
+   MAX_RND = 30;
+
+  for (var i = 0; i < size; i++) {
+   arr.push(rand(MIN_RND, MAX_RND));
+  }
+  return arr;
+ }
+function createMatrix(size) {
+  var array = [];
+  for (var i = 0; i < size; i++) {
+   array.push( createArray(size) );
+  }
+  return array;
+ }
+
+ var arr = createMatrix(10);
+ console.table(arr);
+
+ <!-- Периметр прямоугольника, прямая последовательность -->
+
+    var edge1 = []; // Первая грань
+    for (var i=0; i<arr.length; i++){
+    edge1.push(arr[0][i]);
+   }
+
+    var edge2 = []; // Вторая грань
+    for (var i=1; i<arr.length-1; i++){
+    edge2.push(arr[i][9]);
+   }
+
+    var edge3 = []; // Третья грань
+    for (var i=0; i<arr.length; i++){
+    edge3.push(arr[9][i]);
+   }
+    edge3.reverse(); //Разворот для рпавильной последовательности
+
+    var edge4 = []; // Четвертая грань
+    for (var i=1; i<arr.length-1; i++){
+    edge4.push(arr[i][0]);
+   }
+    edge4.reverse();  //Разворот для рпавильной последовательности
+
+    var PerimeterSquare = edge1.concat(edge2).concat(edge3).concat(edge4);
+    console.log('Периметр прямоугольника, прямая последовательность \n'+PerimeterSquare);  
+
+
+ <!-- Периметр прямоугольника, обратная последовательность -->
+
+    var edgeReturn1 = [];  //Первая грань
+    for (var i=1; i<arr.length; i++){
+    edgeReturn1.push(arr[0][i]);
+   }
+    edgeReturn1.reverse();  //Разворот для рпавильной последовательности
+
+    var edgeReturn2 = [];  //Вторая грань
+    for (var i=1; i<arr.length-1; i++){
+    edgeReturn2.push(arr[i][9]);
+   }
+    edgeReturn2.reverse();
+
+    var edgeReturn3 = [];  //Третья грань
+    for (var i=0; i<arr.length; i++){
+    edgeReturn3.push(arr[9][i]);
+   }
+
+    var edgeReturn4 = [];  //Четвертая грань
+    for (var i=0; i<arr.length-1; i++){
+    edgeReturn4.push(arr[i][0]);
+   }
+
+    var PerimeterSquareReturn = edgeReturn4.concat(edgeReturn3).concat(edgeReturn2).concat(edgeReturn1);
+    console.log('Периметр прямоугольника, обратная последовательность \n'+PerimeterSquareReturn); 
+
+    <!-- Периметр треугольника -->
+
+    var Cathetus1 = [];  //Первый катет
+    for (var i=0; i<arr.length; i++){
+    Cathetus1.push(arr[0][i]);
+   }
+
+    var Cathetus2 = [];  //Второй катет
+    for (var i=1; i<arr.length; i++){
+    Cathetus1.push(arr[i][9]);
+   }
+   
+   var 
+    Hypotenuse = [];   //Гипотенуза
+    for (var i=1; i<arr.length-1; i++){
+        for (var j=0; j<arr.length; j++)
+        if (i==j){
+        Hypotenuse .push(arr[i][j]);
+        }
+   }
+Hypotenuse.reverse();  //Разворот для рпавильной последовательности
+
+    var PerimeterTriangle = Cathetus1.concat(Cathetus2).concat(Hypotenuse);
+
+    console.log('Периметр треугольника \n'+PerimeterTriangle);
