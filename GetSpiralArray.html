@@ -1,0 +1,55 @@
+function rand (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+ }
+
+ function createArray(size) {
+  size = size || 3;
+  var arr = [],
+   MIN_RND = 1;
+   MAX_RND = 30;
+
+  for (var i = 0; i < size; i++) {
+   arr.push(rand(MIN_RND, MAX_RND));
+  }
+  return arr;
+ }
+function createMatrix(size) {
+  var array = [];
+  for (var i = 0; i < size; i++) {
+   array.push( createArray(size) );
+  }
+  return array;
+ }
+
+ var arr = createMatrix(10);
+ console.table(arr);
+
+   PerimeterSquareS=[];// Результат обхода массива по спирали
+ (function Spiral(){
+   for (var n=0; n<=4; n++){
+    var edge1 = []; // Первая грань
+    for (var i=n; i<arr.length-n; i++){
+    edge1.push(arr[n][i]);
+   }
+    var edge2 = []; // Вторая грань
+    for (var i=n+1; i<arr.length-n-1; i++){
+    edge2.push(arr[i][arr.length-1-n]);
+   }
+    var edge3 = []; // Третья грань
+    for (var i=n; i<arr.length-n; i++){
+    edge3.push(arr[arr.length-1-n][i]);
+   }
+    edge3.reverse(); //Разворот для рпавильной последовательности
+    var edge4 = []; // Четвертая грань
+    for (var i=n+1; i<arr.length-1-n; i++){
+    edge4.push(arr[i][n]);
+   }
+    edge4.reverse();  //Разворот для рпавильной последовательности
+
+    var PerimeterSquare = edge1.concat(edge2).concat(edge3).concat(edge4);
+
+    //Периметр прямоугольника, прямая последовательность
+    PerimeterSquareS=PerimeterSquareS.concat(PerimeterSquare);
+    } 
+    console.log('Обход массива по спирали\n'+PerimeterSquareS);
+})();
